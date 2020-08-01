@@ -27,4 +27,6 @@ playerBtn.forEach((btn: Element, i: number) => {
   })
 })
 
-// audioPlayerInit()
+audioPlayerInit()
+radioPlayerInit()
+videoPlayerInit()
