@@ -1,11 +1,8 @@
-export const videoPlayerInit = () => {
-  // video-player
-  // video-button__play
-  // video-button__stop
-  // video-time__passed
-  // video-progress
-  // video-time__total
+import { addZero } from './helpers';
+import { F } from './types';
 
+
+export const videoPlayerInit = <F>function() {
   const videoPlayer: HTMLVideoElement | null = document.querySelector('.video-player')
   const videoButtonPlay: HTMLButtonElement | null = document.querySelector('.video-button__play')
   const videoButtonStop: HTMLButtonElement | null = document.querySelector('.video-button__stop');
@@ -29,7 +26,6 @@ export const videoPlayerInit = () => {
   /**
    * @function togglePlay implement play/stop of player
    */
-
   const togglePlay = (): void => {
     if (videoPlayer!.paused) {
       videoPlayer!.play();
@@ -46,13 +42,6 @@ export const videoPlayerInit = () => {
     videoPlayer!.pause();
     videoPlayer!.currentTime = 0;
   }
-
-  /**
-   * @function addZero add "0" before number
-   * @param n minutes or seconds quantity
-   */
-  const addZero = (n: number): string => n < 10 ? `0${n}` : n;
-
 
   // *--- Events ---*
   /**
@@ -98,6 +87,12 @@ export const videoPlayerInit = () => {
     const duration: number = videoPlayer!.duration;
     const value: number = Number.parseInt(videoProgress.value);
 
-    videoPlayer!.currentTime = (value * duration) / 100
+    videoPlayer!.currentTime = (value * duration) / 100;
   });
+
+  videoPlayerInit.stop = () => {
+    if (!videoPlayer!.paused) {
+      stopPlay()
+    }
+  }
 };
